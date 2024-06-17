@@ -15,20 +15,21 @@ class _TaskState extends State<Task> {
   final TextEditingController num1Controller = TextEditingController();
   final TextEditingController num2Controller = TextEditingController();
   int res = 0;
-  String quote='';
+  String quote = '';
 
   // List of history
   List<String> history = [];
 
   void add() {
-    setState(()  {
+    setState(() {
       int num1 = int.tryParse(num1Controller.text) ?? 0;
       int num2 = int.tryParse(num2Controller.text) ?? 0;
       res = num1 + num2;
       // Add to history
       history.add("$num1 + $num2 = $res");
+    });
+  }
 
-    });  }
   Future<void> fetchQuote() async {
     try {
       final response = await DioClient.dioClient.getAPI(endPoint: APIEndPoint.quotes);
@@ -41,14 +42,14 @@ class _TaskState extends State<Task> {
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("$quote"),
-          SizedBox( height:20),
+          SizedBox(height: 20),
           Text(
             "Adder",
             style: TextStyle(
@@ -96,7 +97,6 @@ class _TaskState extends State<Task> {
                 ),
                 onTap: () {
                   add();
-                 // fetchQuote();
                 },
               ),
               SizedBox(width: 20),
@@ -129,12 +129,18 @@ class _TaskState extends State<Task> {
               },
             ),
           ),
-          SizedBox(height: 5,),
-          TextButton(onPressed: (){
-            Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SecondPage(quote:quote ,fetchQuote:fetchQuote() ,)),
-            );
-          }, child: Text("Go second page")),
+          SizedBox(height: 5),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SecondPage(fetchQuote: fetchQuote, Quote: quote),
+                ),
+              );
+            },
+            child: Text("Go to second page"),
+          ),
         ],
       ),
     );
