@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SecondPage extends StatefulWidget {
-  const SecondPage({Key? key, required this.fetchQuote, required this.Quote}) : super(key: key);
+  const SecondPage({super.key, required this.fetchQuote, required this.firstQuote});
   final Future<void> Function() fetchQuote;
-  final String Quote;
+  final String firstQuote;
 
   @override
   State<SecondPage> createState() => _SecondPageState();
@@ -15,14 +15,14 @@ class _SecondPageState extends State<SecondPage> {
   @override
   void initState() {
     super.initState();
-    quote = widget.Quote;
+    quote = widget.firstQuote;
     _getQuote();
   }
 
   Future<void> _getQuote() async {
     await widget.fetchQuote();
     setState(() {
-      quote = widget.Quote;
+      quote = widget.firstQuote;
     });
   }
 

@@ -131,11 +131,12 @@ class _TaskState extends State<Task> {
           ),
           SizedBox(height: 5),
           TextButton(
-            onPressed: () {
+            onPressed: () async {
+              await fetchQuote();
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SecondPage(fetchQuote: fetchQuote, Quote: quote),
+                  builder: (context) => SecondPage(fetchQuote: fetchQuote, initialQuote: quote),
                 ),
               );
             },
