@@ -136,7 +136,7 @@ class _TaskState extends State<Task> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => SecondPage(fetchQuote: fetchQuote, initialQuote: quote),
+                  builder: (context) => SecondPage(fetchQuote: fetchQuote, firstQuote: quote),
                 ),
               );
             },
