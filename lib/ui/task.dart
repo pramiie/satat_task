@@ -30,16 +30,12 @@ class _TaskState extends State<Task> {
     });
   }
 
-  Future<void> fetchQuote() async {
+  Future<String> fetchQuote() async {
     try {
       final response = await DioClient.dioClient.getAPI(endPoint: APIEndPoint.quotes);
-      setState(() {
-        quote = response.data[0]['q'];
-      });
+      return response.data[0]['q'];
     } catch (e) {
-      setState(() {
-        quote = "Failed to fetch quote: $e";
-      });
+      return "Failed to fetch quote: $e";
     }
   }
 
@@ -132,7 +128,7 @@ class _TaskState extends State<Task> {
           SizedBox(height: 5),
           TextButton(
             onPressed: () async {
-              await fetchQuote();
+              String quote = await fetchQuote();
               Navigator.push(
                 context,
                 MaterialPageRoute(
