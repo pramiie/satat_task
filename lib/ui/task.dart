@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:satat_task/ui/second_page.dart';
 
 import '../framework/api/api_end_point.dart';
 import '../framework/api/dio_client.dart';
@@ -95,7 +96,7 @@ class _TaskState extends State<Task> {
                 ),
                 onTap: () {
                   add();
-                  fetchQuote();
+                 // fetchQuote();
                 },
               ),
               SizedBox(width: 20),
@@ -128,6 +129,12 @@ class _TaskState extends State<Task> {
               },
             ),
           ),
+          SizedBox(height: 5,),
+          TextButton(onPressed: (){
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SecondPage(quote:quote ,fetchQuote:fetchQuote() ,)),
+            );
+          }, child: Text("Go second page")),
         ],
       ),
     );
