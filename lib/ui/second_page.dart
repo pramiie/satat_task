@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({super.key, required this.fetchQuote, required this.firstQuote});
-  final Future<String> Function() fetchQuote;
+  final Future<void> Function() fetchQuote;
   final String firstQuote;
 
   @override
@@ -16,12 +16,13 @@ class _SecondPageState extends State<SecondPage> {
   void initState() {
     super.initState();
     quote = widget.firstQuote;
+    _getQuote();
   }
 
   Future<void> _getQuote() async {
-    String newQuote = await widget.fetchQuote();
+    await widget.fetchQuote();
     setState(() {
-      quote = newQuote;
+      quote = widget.firstQuote;
     });
   }
 
@@ -39,7 +40,7 @@ class _SecondPageState extends State<SecondPage> {
             children: [
               Text(
                 quote,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
